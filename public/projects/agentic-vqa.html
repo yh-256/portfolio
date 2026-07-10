@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja" data-theme="light" data-lang="ja">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="長時間映像に対するエージェンティック映像質問応答システムの設計と評価。">
+  <meta name="theme-color" content="#f3f1ec">
+  <meta property="og:image" content="https://yh-256.github.io/portfolio/assets/og-card.png">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="project.css">
+  <title>Agentic Video QA — YH</title>
+</head>
+<body class="project-page">
+  <a class="skip-link" href="#main">本文へスキップ</a>
+  <header class="site-header" data-header>
+    <div class="shell header-inner">
+      <a class="wordmark" href="../index.html"><span class="wordmark-mark">YH</span><span class="wordmark-text">Research & Engineering</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-nav-toggle><span class="sr-only">メニューを開く</span><span></span><span></span></button>
+      <nav class="primary-nav" id="primary-nav" data-nav><a href="../index.html#projects"><span class="lang-ja">研究・制作</span><span class="lang-en">Work</span></a><a href="../index.html#about">About</a><a href="../index.html#contact">Contact</a></nav>
+      <div class="header-actions"><button class="utility-button" type="button" data-language-toggle aria-label="表示言語を切り替える"><span class="lang-ja">EN</span><span class="lang-en">日本語</span></button><button class="utility-button icon-button" data-theme-toggle aria-label="配色を切り替える"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg></button></div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="project-hero">
+      <div class="shell">
+        <a class="project-back" href="../index.html#projects">← <span class="lang-ja">一覧へ戻る</span><span class="lang-en">Back to work</span></a>
+        <div class="project-hero-grid">
+          <div><p class="project-type">Research / Multimodal AI / 2026</p><h1>Agentic<br>Video QA</h1><p class="project-deck"><span class="lang-ja">長時間映像に対し、質問を分解し、必要なツールと根拠を選び、回答を検証・再生成する映像質問応答システム。</span><span class="lang-en">A long-form video QA system that decomposes questions, selects tools and evidence, then verifies and revises answers.</span></p></div>
+          <dl class="project-facts">
+            <div><dt>Status</dt><dd class="project-status"><span class="lang-ja">研究・評価中</span><span class="lang-en">Research in progress</span></dd></div>
+            <div><dt>Role</dt><dd><span class="lang-ja">設計 / 実装 / 評価</span><span class="lang-en">Design / implementation / evaluation</span></dd></div>
+            <div><dt>Stack</dt><dd>Python, vLLM, Qwen3-VL, RAG</dd></div>
+            <div><dt>Focus</dt><dd>Planning, evidence, verification</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-content"><div class="shell">
+      <div class="content-grid"><p class="content-label">01 / Context</p><div class="prose">
+        <h2><span class="lang-ja">映像を見られるだけでは、長時間映像には答えられない。</span><span class="lang-en">Seeing video is not enough for answering long-form video.</span></h2>
+        <p><span class="lang-ja">長時間映像に対する質問では、全フレームを一度にモデルへ渡すことは難しく、質問ごとに必要な証拠も異なります。物体、動作、音声、時間関係など、問いに応じて確認対象を切り替える必要があります。</span><span class="lang-en">For long videos, sending every frame to a model is impractical, and each question requires different evidence—objects, actions, speech, or temporal relationships.</span></p>
+        <p><span class="lang-ja">そこで、単一のVLMに即答させるのではなく、<strong>回答計画を立て、ツールを使い、集めた根拠を検証してから回答する</strong>エージェント構成を採用しました。</span><span class="lang-en">Instead of asking one VLM to answer immediately, the system plans, calls tools, verifies gathered evidence, and only then produces an answer.</span></p>
+      </div></div>
+
+      <figure class="figure"><div class="figure-frame">
+        <svg viewBox="0 0 1100 500" role="img" aria-label="Agentic Video QA architecture">
+          <rect x="35" y="188" width="150" height="100" rx="8"/><text x="76" y="232">QUESTION</text><text x="75" y="252">+ VIDEO</text>
+          <rect x="250" y="68" width="180" height="100" rx="8"/><text x="295" y="112">EVIDENCE</text><text x="309" y="132">PLANNER</text>
+          <rect x="250" y="328" width="180" height="100" rx="8"/><text x="295" y="372">TOOL</text><text x="284" y="392">EXECUTION</text>
+          <rect x="500" y="68" width="180" height="100" rx="8"/><text x="542" y="112">EVIDENCE</text><text x="554" y="132">STORE</text>
+          <rect x="500" y="328" width="180" height="100" rx="8"/><text x="550" y="372">ANSWER</text><text x="538" y="392">GENERATOR</text>
+          <rect x="750" y="188" width="180" height="100" rx="8"/><text x="788" y="232">VERIFIER</text><text x="783" y="252">& RERANKER</text>
+          <rect x="980" y="188" width="90" height="100" rx="8"/><text x="1001" y="232">FINAL</text><text x="995" y="252">ANSWER</text>
+          <path d="M185 238h50l15-120M185 238h50l15 140M430 118h70M430 378h70M590 168v160M680 378h35l35-140M680 118h35l35 120M930 238h50"/>
+          <polyline points="238,110 250,118 238,126"/><polyline points="238,370 250,378 238,386"/><polyline points="488,110 500,118 488,126"/><polyline points="488,370 500,378 488,386"/><polyline points="738,230 750,238 738,246"/><polyline points="968,230 980,238 968,246"/>
+          <path d="M840 188V36H340v32" stroke-dasharray="6 6"/><polyline points="332,56 340,68 348,56"/>
+          <text x="568" y="25">REPLAN WHEN EVIDENCE IS INSUFFICIENT</text>
+        </svg>
+      </div><figcaption><span><span class="lang-ja">図1. 回答計画、ツール実行、根拠管理、検証を分離した構成</span><span class="lang-en">Fig. 1. Separation of planning, tool execution, evidence management, and verification</span></span><span>System architecture</span></figcaption></figure>
+
+      <div class="content-grid"><p class="content-label">02 / Design</p><div class="prose">
+        <h2><span class="lang-ja">役割を分け、失敗箇所を観測可能にする。</span><span class="lang-en">Separate responsibilities so failures can be observed.</span></h2>
+        <ol class="process-list">
+          <li><div><strong>Evidence planning</strong><br><span class="lang-ja">質問から必要なモダリティ、時間範囲、検索方法を決定。</span><span class="lang-en">Decide modalities, time ranges, and retrieval methods from the question.</span></div></li>
+          <li><div><strong>Tool execution</strong><br><span class="lang-ja">フレーム検索、字幕・音声、物体・行動情報などを必要な分だけ取得。</span><span class="lang-en">Retrieve only the needed frames, speech, objects, or action cues.</span></div></li>
+          <li><div><strong>Evidence formatting</strong><br><span class="lang-ja">根拠を出典・時刻・信頼度とともに共通形式へ整理。</span><span class="lang-en">Normalize evidence with source, timestamp, and confidence.</span></div></li>
+          <li><div><strong>Generation & verification</strong><br><span class="lang-ja">候補回答を生成し、根拠との整合性を確認。弱い場合は再計画。</span><span class="lang-en">Generate candidate answers, verify consistency, and replan when weak.</span></div></li>
+        </ol>
+        <div class="callout"><p><span class="lang-ja">設計上の要点は、エージェントらしさを「自由な会話」ではなく、<strong>観測可能な意思決定と再試行</strong>として定義したことです。</span><span class="lang-en">The key design choice is defining agency not as free-form conversation, but as observable decisions and controlled retries.</span></p></div>
+      </div></div>
+
+      <div class="content-grid"><p class="content-label">03 / Evaluation</p><div class="prose">
+        <h2><span class="lang-ja">最終精度だけでなく、設計が効いた理由を検証する。</span><span class="lang-en">Evaluate not only accuracy, but why the design works.</span></h2>
+        <p><span class="lang-ja">ベースラインとの総合比較に加え、ツールなし、全ツール固定、計画なし、検証なし、再生成なしといったアブレーションを行います。これにより、単に強いモデルを使った結果ではなく、各エージェント機構の寄与を分離します。</span><span class="lang-en">Alongside baseline comparisons, the evaluation removes tools, planning, verification, and regeneration one at a time to isolate the contribution of each mechanism.</span></p>
+        <ul><li><span class="lang-ja">回答精度と根拠整合性</span><span class="lang-en">Answer accuracy and evidence consistency</span></li><li><span class="lang-ja">ツール呼び出し回数・レイテンシ</span><span class="lang-en">Tool calls and latency</span></li><li><span class="lang-ja">質問タイプ別の失敗分析</span><span class="lang-en">Failure analysis by question type</span></li><li><span class="lang-ja">再計画・再生成が有効だった事例</span><span class="lang-en">Cases where replanning or revision helped</span></li></ul>
+      </div></div>
+
+      <div class="project-next"><p class="content-label">Next project</p><a href="anomaly-anticipation.html"><p>Research / Synthetic data</p><h2><span class="lang-ja">生成動画を用いた<br>異常予兆検知 →</span><span class="lang-en">Anomaly anticipation<br>with synthetic video →</span></h2></a></div>
+    </div></section>
+  </main>
+  <footer class="site-footer"><div class="shell footer-inner"><p>© <span data-current-year>2026</span> YH</p><p>Agentic Video QA</p><a href="#main"><span class="lang-ja">ページ上部へ</span><span class="lang-en">Back to top</span> ↑</a></div></footer>
+  <script src="../script.js"></script>
+</body></html>

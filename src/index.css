@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --background: 48 24% 93%;
+    --foreground: 90 6% 6%;
+    --card: 48 24% 93%;
+    --card-foreground: 90 6% 6%;
+    --muted: 45 12% 87%;
+    --muted-foreground: 70 4% 42%;
+    --border: 50 8% 78%;
+    --primary: 76 100% 62%;
+    --primary-foreground: 90 6% 6%;
+    --accent: 76 100% 62%;
+    --accent-foreground: 90 6% 6%;
+    --accent-soft: 76 100% 88%;
+    --canvas: 90 6% 6%;
+    --ring: 76 100% 62%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 68px;
+  }
+
+  body {
+    @apply m-0 font-sans antialiased;
+    background-color: #10110f;
+    color: #10110f;
+    min-width: 320px;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01" 1, "ss02" 1, "cv11" 1;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ::selection {
+    background: #c7ff3d;
+    color: #10110f;
+  }
+}
+
+@layer components {
+  .section-label {
+    @apply font-mono text-[10px] font-bold uppercase tracking-[0.2em];
+  }
+
+  .spline-interactive {
+    pointer-events: none;
+  }
+
+  .editorial-grid {
+    background-image:
+      linear-gradient(rgba(16, 17, 15, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(16, 17, 15, 0.08) 1px, transparent 1px);
+    background-size: 42px 42px;
+  }
+
+  .editorial-grid-dark {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+    background-size: 42px 42px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .spline-interactive {
+    pointer-events: auto;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "YH — AI Research & Engineering",
+  "short_name": "YH Portfolio",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6d5dfc",
+  "icons": [
+    { "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
