@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: 'main' # 必要に応じて master に変更
+    branches: 'main' # main以外のブランチ名（masterなど）を使っている場合は変更してください
 
 permissions:
   contents: read
@@ -22,15 +22,41 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # 1. Node.js を最新の 24 でセットアップ
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: 'pnpm'
+          node-version: 24
+
+      # 2. pnpm をインストール
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9 # 手元のpnpmがv8なら 8 に変更してください（分からなければ 9 のままでOK）
+
+      # 3. pnpm のキャッシュを設定（2回目以降のビルドが速くなります）
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      # 4. 依存関係のインストールとビルド
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
+
       - name: Build
-        run: npm run build
+        run: pnpm run build
+
+      # 5. GitHub Pages へのデプロイ処理
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
