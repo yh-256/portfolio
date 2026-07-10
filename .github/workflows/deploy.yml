@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: 'main' # main以外のブランチ名（masterなど）を使っている場合は変更してください
+    branches: 'main'
 
 permissions:
   contents: read
@@ -33,18 +33,13 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9 # 手元のpnpmがv8なら 8 に変更してください（分からなければ 9 のままでOK）
+          version: 9
 
-      # 3. pnpm のキャッシュを設定（2回目以降のビルドが速くなります）
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
+      # 3. pnpm のキャッシュを設定（確実なパス指定に変更）
       - name: Setup pnpm cache
         uses: actions/cache@v4
         with:
-          path: ${{ env.STORE_PATH }}
+          path: ~/.local/share/pnpm/store/v3 # Linux環境でのデフォルトのストア位置
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
