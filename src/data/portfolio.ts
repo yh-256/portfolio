@@ -106,8 +106,8 @@ export const publications = [
     year: "2025",
     venue: "DIA 2025",
     type: "Poster Presentation",
-    title: "人物画像の年齢分類に関する研究",
-    note: "人物画像分類・深層学習に関する研究成果をポスター発表。",
+    title: "DIA 2025 Poster Presentation",
+    note: "人物画像の年齢分類・深層学習に関する研究成果をポスター発表。正式題目と公開リンクは確認後に追加します。",
   },
 ];
 
